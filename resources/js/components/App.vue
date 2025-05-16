@@ -23,6 +23,7 @@
                     <input type="password" class="form-control" v-model="login.password" required />
                 </div>
                 <button class="btn btn-success">Entrar</button>
+                <p v-if="errorMessage" class="text-danger mt-2">{{ errorMessage }}</p> <!-- Mensaje de error -->
             </form>
         </div>
 
@@ -47,13 +48,10 @@
                 </div>
                 <button class="btn btn-primary">Registrarse</button>
                 <p v-if="errorMessage" class="text-danger mt-2">{{ errorMessage }}</p> <!-- Mensaje de error -->
-
-
             </form>
-
             <p v-if="successMessage" class="text-success mt-2">{{ successMessage }}</p> <!-- Mensaje de error -->
-
         </div>
+        <router-view />
     </div>
 </template>
 
@@ -77,10 +75,22 @@ export default {
         };
     },
     methods: {
-        enviarLogin() {
+        async enviarLogin() {
+            this.errorMessage = '';
+            try {
+                const response = await axios.post('/api/login', {
+                    email: this.login.email,
+                    password: this.login.password,
+                });
+                alert('¡Inicio de sesión exitoso!');
+            } catch (error) {
+               console.log(error.response.data.message);
+               this.errorMessage = error.response.data.message;
+            }
             // Aquí puedes usar axios para enviar login a tu backend Laravel
-            alert(`Login: ${this.login.email}`);
+            //alert(`Login: ${this.login.email}`);
         },
+
         async enviarRegistro() {
             this.errorMessage = '';
             try {
