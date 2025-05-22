@@ -1,8 +1,31 @@
 import './bootstrap';
 import {createApp} from 'vue';
 import router from './router';
-import App from './components/App.vue';
+import App from './components/Welcome.vue';
+import HomeOrg from './components/HomeOrg.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
+import Main from './components/App.vue';
+import HomeVolunteer from './components/HomeVolunteer.vue';
+import EventCard from './components/Events/EventCard.vue';
+import Event from './components/Events/Event.vue';
+import Navbar from './components/Navbar.vue';
+import CreateEvent from './components/Events/createEvent.vue';
+import EditEvent from './components/Events/EditEvent.vue';
+import Participants from './components/Events/Participants.vue';
+import ExploreEvents from './components/Events/ExploreEvents.vue';
+import EventMap from './components/EventMap.vue';
 
-createApp(App).use(router).mount('#app');
+const app = createApp(Main);
+app.component('HomeOrg', HomeOrg);
+app.component('HomeVolunteer', HomeVolunteer);
+app.component('EventCard', EventCard);
+app.component('Event', Event);
+app.component('Navbar', Navbar);
+app.component('CreateEvent', CreateEvent);
+app.component('EditEvent', EditEvent);
+app.component('Participants', Participants);
+app.component('ExploreEvents', ExploreEvents);
+app.component('EventMap', EventMap );
+app.use(router).mount('#app');
+
